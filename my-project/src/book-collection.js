@@ -1,0 +1,11 @@
+'use strict';
+exports.__esModule = true;
+exports.books = void 0;
+var book_js_1 = require('./book.js');
+exports.books = [
+  new book_js_1.Book('Harry Potter', 'fantasy', 980),
+  new book_js_1.Book('Lord of the Ring', 'fantasy', 1001),
+  new book_js_1.Book('How to be productive', 'lifestyle', 500),
+  new book_js_1.Book('Game of Thrones', 'fantasy', 999)
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYm9vay1jb2xsZWN0aW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYm9vay1jb2xsZWN0aW9uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLHFDQUFnQztBQUVuQixRQUFBLEtBQUssR0FBRTtJQUNsQixJQUFJLGNBQUksQ0FBQyxjQUFjLEVBQUUsU0FBUyxFQUFFLEdBQUcsQ0FBQztJQUN4QyxJQUFJLGNBQUksQ0FBQyxrQkFBa0IsRUFBRSxTQUFTLEVBQUUsSUFBSSxDQUFDO0lBQzdDLElBQUksY0FBSSxDQUFDLHNCQUFzQixFQUFFLFdBQVcsRUFBRSxHQUFHLENBQUM7SUFDbEQsSUFBSSxjQUFJLENBQUMsaUJBQWlCLEVBQUUsU0FBUyxFQUFFLEdBQUcsQ0FBQztDQUM1QyxDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQm9vayB9IGZyb20gJy4vYm9vay5qcydcblxuZXhwb3J0IGNvbnN0IGJvb2tzID1bXG4gIG5ldyBCb29rKCdIYXJyeSBQb3R0ZXInLCAnZmFudGFzeScsIDk4MCksXG4gIG5ldyBCb29rKCdMb3JkIG9mIHRoZSBSaW5nJywgJ2ZhbnRhc3knLCAxMDAxKSxcbiAgbmV3IEJvb2soJ0hvdyB0byBiZSBwcm9kdWN0aXZlJywgJ2xpZmVzdHlsZScsIDUwMCksXG4gIG5ldyBCb29rKCdHYW1lIG9mIFRocm9uZXMnLCAnZmFudGFzeScsIDk5OSlcbl1cbiJdfQ==
