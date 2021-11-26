@@ -1,21 +1,71 @@
 import { Book } from './book.js';
-import { books } from './book-collection.js';
-function findSuitableBook(genre, pagesLimit, multipleRecommendations = true) {
-    const findAlgorithm = (book) => {
-        return book.genre === genre && book.pageAmount <= pagesLimit;
-    };
-    if (multipleRecommendations) {
-        return books.filter(findAlgorithm);
+// import { serialize } from './helpers.js'
+import { showCart } from './helpers.js';
+import { Genre } from './types.js';
+import { getGenreName } from './helpers.js';
+// function findSuitableBook (
+//   genre:     string,
+//   pagesLimit: number,
+//   multipleRecommendations =true
+// ) : Book | Book[] {
+//   const findAlgorithm = (book: Book) =>{
+//     return book.genre === genre && book.pageAmount <= pagesLimit
+//   }
+//   if (multipleRecommendations) {
+//     return books.filter(findAlgorithm)
+//   } else {
+//     return books.find(findAlgorithm)
+//   }
+// }
+// const recommendedBook = findSuitableBook('fantasy', 1000)
+// if(recommendedBook instanceof Book){
+//   console.log(recommendedBook.name)
+// } else {
+//   console.log(recommendedBook[0].name)
+// }
+// const book = new Book('Harry Potter')
+// if(book.price == null){
+//   console.log('book is absence in sell')
+// } else {
+//   console.log('book appear in sell')
+// }
+// console.log(book.genre.toUpperCase(), book.price.toFixed(2))
+// import { books } from './book-collection.js'
+// // Явная типизация
+// let genre: string = 'fantasy';
+// let price: number = 980;
+// // Неявная типизация
+// let genre = 'fantasy';
+// let price = 980;
+// const book = new Book('Harry Potter', genre, price)
+// function CanIBuyTheBook (book:Book){
+//   return book.price != null;
+// }
+// if(CanIBuyTheBook(book)){
+//   console.log('The book is absence')
+// } else {
+//   console.log('You can buy the book')
+// }
+// let genre: string = 'fantasy'
+// let price = 980
+// const book = new Book('Harry Potter', genre, price)
+// console.log(serialize(book))
+// console.log(serialize(null))
+// console.log(serialize(undefined))
+// console.log(serialize(5))
+// console.log(serialize(false))
+const reviews = [
+    ['John', 5, 'It is my favorite book'],
+    ['Mary', 3, 'I expected more from it :('],
+    ['Clara', 5, 'Read it again and again!']
+];
+const book = new Book('Harry Potter', Genre.Fantasy, 980, { firstName: 'J.K.', lastName: 'Rowling', rating: 4.6 });
+const notepad = {
+    price: 40,
+    getProductDescription: () => {
+        return 'Notepad with Unicorn, 50 pages';
     }
-    else {
-        return books.find(findAlgorithm);
-    }
-}
-const recommendedBook = findSuitableBook('fantasy', 1000);
-if (recommendedBook instanceof Book) {
-    console.log(recommendedBook.name);
-}
-else {
-    console.log(recommendedBook[0].name);
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLElBQUksRUFBRSxNQUFNLFdBQVcsQ0FBQTtBQUNoQyxPQUFPLEVBQUUsS0FBSyxFQUFFLE1BQU0sc0JBQXNCLENBQUE7QUFFNUMsU0FBUyxnQkFBZ0IsQ0FDckIsS0FBYSxFQUNiLFVBQWtCLEVBQ2xCLHVCQUF1QixHQUFFLElBQUk7SUFFN0IsTUFBTSxhQUFhLEdBQUcsQ0FBQyxJQUFVLEVBQUUsRUFBRTtRQUNqQyxPQUFPLElBQUksQ0FBQyxLQUFLLEtBQUssS0FBSyxJQUFJLElBQUksQ0FBQyxVQUFVLElBQUksVUFBVSxDQUFBO0lBQ2hFLENBQUMsQ0FBQTtJQUVELElBQUksdUJBQXVCLEVBQUU7UUFDekIsT0FBTyxLQUFLLENBQUMsTUFBTSxDQUFDLGFBQWEsQ0FBQyxDQUFBO0tBQ3JDO1NBQU07UUFDSCxPQUFPLEtBQUssQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUE7S0FDbkM7QUFDTCxDQUFDO0FBRUQsTUFBTSxlQUFlLEdBQUcsZ0JBQWdCLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxDQUFBO0FBQ3pELElBQUcsZUFBZSxZQUFZLElBQUksRUFBQztJQUMvQixPQUFPLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsQ0FBQTtDQUNwQztLQUFNO0lBQ0gsT0FBTyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUE7Q0FDdkMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBCb29rIH0gZnJvbSAnLi9ib29rLmpzJ1xuaW1wb3J0IHsgYm9va3MgfSBmcm9tICcuL2Jvb2stY29sbGVjdGlvbi5qcydcblxuZnVuY3Rpb24gZmluZFN1aXRhYmxlQm9vayAoXG4gICAgZ2VucmU6IHN0cmluZyxcbiAgICBwYWdlc0xpbWl0OiBudW1iZXIsXG4gICAgbXVsdGlwbGVSZWNvbW1lbmRhdGlvbnMgPXRydWVcbiAgICApIDogQm9vayB8IEJvb2tbXSB7XG4gICAgY29uc3QgZmluZEFsZ29yaXRobSA9IChib29rOiBCb29rKSA9PntcbiAgICAgICAgcmV0dXJuIGJvb2suZ2VucmUgPT09IGdlbnJlICYmIGJvb2sucGFnZUFtb3VudCA8PSBwYWdlc0xpbWl0XG4gICAgfVxuXG4gICAgaWYgKG11bHRpcGxlUmVjb21tZW5kYXRpb25zKSB7XG4gICAgICAgIHJldHVybiBib29rcy5maWx0ZXIoZmluZEFsZ29yaXRobSlcbiAgICB9IGVsc2Uge1xuICAgICAgICByZXR1cm4gYm9va3MuZmluZChmaW5kQWxnb3JpdGhtKVxuICAgIH1cbn1cblxuY29uc3QgcmVjb21tZW5kZWRCb29rID0gZmluZFN1aXRhYmxlQm9vaygnZmFudGFzeScsIDEwMDApXG5pZihyZWNvbW1lbmRlZEJvb2sgaW5zdGFuY2VvZiBCb29rKXtcbiAgICBjb25zb2xlLmxvZyhyZWNvbW1lbmRlZEJvb2submFtZSlcbn0gZWxzZSB7XG4gICAgY29uc29sZS5sb2cocmVjb21tZW5kZWRCb29rWzBdLm5hbWUpXG59XG4iXX0=
+};
+// console.log(showRating(book.author), showRating(book))
+showCart([book, notepad]);
+console.log(getGenreName(book.genre));
