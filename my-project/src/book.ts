@@ -1,17 +1,19 @@
 import { Author } from './author.js'
 import { Ratingable } from './ratingable.js'
 import { Product } from './product'
-import { Review, Genre } from './types.js'
+import { Review, Genre, BookAuthor } from './types.js'
+
 
 export class Book implements Ratingable, Product {
   rating: number
   name: string
   genre: Genre
   price: number
-  author: Author
+  // author: Partial<Author>
+  author: BookAuthor
   reviews: Review[]
 
-  constructor (name: string, genre: Genre, price: number, author: Author, reviews?: Review[]){
+  constructor (name: string, genre: Genre, price: number, author: BookAuthor, reviews?: Review[]){
     this.name = name
     this.genre = genre
     this.price = price

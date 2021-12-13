@@ -1,8 +1,69 @@
-import { Book } from './book.js';
-export const books = [
-    new Book('Harry Potter and Philosophers Stone', 'fantasy', 980),
-    new Book('Lord of the Ring', 'fantasy', 1001),
-    new Book('How to be productive', 'lifestyle', 500),
-    new Book('Game of Thrones', 'fantasy', 999)
-];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYm9vay1jb2xsZWN0aW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2Jvb2stY29sbGVjdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsSUFBSSxFQUFFLE1BQU0sV0FBVyxDQUFBO0FBRWhDLE1BQU0sQ0FBQyxNQUFNLEtBQUssR0FBRTtJQUNsQixJQUFJLElBQUksQ0FBQyxxQ0FBcUMsRUFBRSxTQUFTLEVBQUUsR0FBRyxDQUFDO0lBQy9ELElBQUksSUFBSSxDQUFDLGtCQUFrQixFQUFFLFNBQVMsRUFBRSxJQUFJLENBQUM7SUFDN0MsSUFBSSxJQUFJLENBQUMsc0JBQXNCLEVBQUUsV0FBVyxFQUFFLEdBQUcsQ0FBQztJQUNsRCxJQUFJLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxTQUFTLEVBQUUsR0FBRyxDQUFDO0NBQzVDLENBQUEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBCb29rIH0gZnJvbSAnLi9ib29rLmpzJ1xuXG5leHBvcnQgY29uc3QgYm9va3MgPVtcbiAgbmV3IEJvb2soJ0hhcnJ5IFBvdHRlciBhbmQgUGhpbG9zb3BoZXJzIFN0b25lJywgJ2ZhbnRhc3knLCA5ODApLFxuICBuZXcgQm9vaygnTG9yZCBvZiB0aGUgUmluZycsICdmYW50YXN5JywgMTAwMSksXG4gIG5ldyBCb29rKCdIb3cgdG8gYmUgcHJvZHVjdGl2ZScsICdsaWZlc3R5bGUnLCA1MDApLFxuICBuZXcgQm9vaygnR2FtZSBvZiBUaHJvbmVzJywgJ2ZhbnRhc3knLCA5OTkpXG5dXG4iXX0=
+import { Collection } from './collection.js';
+// export const books =[
+//   new Book('Harry Potter and Philosophers Stone', 'fantasy', 980),
+//   new Book('Lord of the Ring', 'fantasy', 1001),
+//   new Book('How to be productive', 'lifestyle', 500),
+//   new Book('Game of Thrones', 'fantasy', 999)
+// ]
+// export interface BookCollection {
+//   [key: string]: Book
+// }
+// export interface Collection<T> {
+//   [key:string]: T
+// }
+// export const programmingLiterature: Collection<Book> = {
+//   'Cracking the coding interview': new Book(
+//     'Cracking the coding interview', 4, 100,
+//     {
+//       firstName: 'Gayle',
+//       lastName: 'Laakmann',
+//       rating: 5
+//     }
+//   )
+// }
+// export function getFromShelf(shelf: Collection<Book>, bookName: string): Book{
+//   const book = shelf[bookName]
+//   if(book == null) {
+//     throw Error('There is no such book on the shelf.')
+//   }
+//   return book
+// }
+// export const programmingLiterature: Collection<Book,string> = new Collection()
+// programmingLiterature.set(
+//   'Cracking the coding interview',
+//   new Book(
+//     'Cracking the coding interview', 4, 100,
+//     {
+//       firstName: 'Gayle',
+//       lastName: 'Laakmann',
+//       rating: 5
+//     }
+//   )
+// )
+// export function getFromShelf(shelf: Map<string, Book>, bookName: string): Book {
+//   const book = shelf.get(bookName)
+//   if(book == null) {
+//     throw Error('There is no such book on the shelf.')
+//   }
+//   return book
+// }
+// export function getFromMap<K,V>(data: Collection<K, V>, key: K): V {
+//   const value = data.get(key)
+//   if(value == null) {
+//     throw Error('There is no such book on the shelf.')
+//   }
+//   return value
+// }
+export class ProductCollection extends Collection {
+    get price() {
+        let totalPrice = 0;
+        const keys = Object.getOwnPropertyNames(this.items);
+        for (const key of keys) {
+            const item = this.items[key];
+            totalPrice += item.price;
+        }
+        return totalPrice;
+    }
+}
+export class BookCollection extends ProductCollection {
+}
